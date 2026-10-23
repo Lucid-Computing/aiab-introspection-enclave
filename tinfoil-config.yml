@@ -10,7 +10,7 @@ networks:
 
 containers:
   - name: aiab
-    image: ghcr.io/lucid-computing-labs/aiab-introspection-enclave@sha256:e42c2af9be20bd0aac1550f216b104b88f7f73121797558818c177b786e7f0db
+    image: ghcr.io/lucid-computing/aiab-introspection-enclave@sha256:e42c2af9be20bd0aac1550f216b104b88f7f73121797558818c177b786e7f0db
     user: "65532:65532"
     read_only: true
     tmpfs:

@@ -2,7 +2,7 @@
 
 This directory contains only measured deployment settings, a policy manifest, and a pinned measurement workflow. The measured v0.1.1 release uses CVM 0.14.9 and passed live enclave acceptance on 2026-09-19.
 
-Application image: `ghcr.io/lucid-computing-labs/aiab-introspection-enclave@sha256:e42c2af9be20bd0aac1550f216b104b88f7f73121797558818c177b786e7f0db`
+Current configuration image: `ghcr.io/lucid-computing/aiab-introspection-enclave@sha256:e42c2af9be20bd0aac1550f216b104b88f7f73121797558818c177b786e7f0db`
 
 Offline policy digest: `8d03b314f111446aba77f1b944fda015919b0e0e222b0026b9057fee47cc1092`
 
@@ -27,3 +27,22 @@ Two independent clean local builds from the committed source, with GitHub checko
 Image config digest: `sha256:e22afb3f006bbb4940ece646e67561f2d20a91fe7dda2eae37c4b7980d93085b`. Both OCI exports were inspected across all layers and contain no Python bytecode or application cache directories.
 
 This public config contains no provider credentials or private repository history. The private runtime image contains the application and classifier definitions; those files are not published by this configuration repository. Browser TLS terminates at the host, and governed inference is sent to Anthropic over HTTPS; neither is claimed to execute confidentially.
+
+## Organization migration (2026-10-23)
+
+The configuration on `main` now uses the `Lucid-Computing` GHCR namespace,
+retaining the exact application digest from v0.1.1. This is a configuration
+candidate, not a newly measured or deployed release. The v0.1.1 release and
+measurement above describe the historical configuration with the old registry path.
+
+Before deployment, verify that the pinned image is readable in the new namespace
+using the deployment registry credential. The operator's attempted migration push
+was rejected with HTTP 403; do not assume moving the GitHub repository moved all
+container versions or granted package access. An exact copy is cached on the
+operator VPS and can be published without rebuilding once package access is fixed.
+Keep the package private.
+
+Then tag a new release, run `measure-release.yml`, update the Tinfoil deployment,
+and verify/update the gateway's expected repository and release measurement.
+Do not rewrite old tags or substitute the new config for an old measurement.
+The separately deployed signed-plan demo uses `aiab-signed-audit-enclave`.
