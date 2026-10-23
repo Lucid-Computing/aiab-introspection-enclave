@@ -46,3 +46,13 @@ The v0.1.2 staged deployment was promoted after becoming ready. Independent
 verification and requests through the updated local gateway succeeded. Tinfoil
 still stores the historical GitHub repository alias internally; the release and
 client verification use the canonical `Lucid-Computing` repository.
+
+### Remaining inference credential issue
+
+The post-migration chat smoke test reached the verified enclave but returned
+`502 upstream_unavailable` (the gateway returns a generic 503). A direct check of
+the operator VPS's existing Anthropic credential returned `401 invalid x-api-key`.
+The deployment migration and attestation are verified, but successful chat
+inference is not. Provision a valid Anthropic credential for this legacy service
+and retest. The provider-held secret has not been inspected or replaced, so the
+local credential failure alone does not prove the provider uses the same value.

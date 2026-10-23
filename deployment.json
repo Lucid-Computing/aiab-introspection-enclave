@@ -7,5 +7,12 @@
   "release_digest": "1cf9d292b7631486880cdd8ced07e4a92df330908a23a7984dff2f1e9ffe6b34",
   "policy_digest": "8d03b314f111446aba77f1b944fda015919b0e0e222b0026b9057fee47cc1092",
   "verification": "attestation, approved policy, public identity, gateway health and model listing verified",
-  "measurement_workflow": "https://github.com/Lucid-Computing/aiab-introspection-enclave/actions/runs/39922093864"
+  "measurement_workflow": "https://github.com/Lucid-Computing/aiab-introspection-enclave/actions/runs/39922093864",
+  "inference_smoke_test": {
+    "status": "failed",
+    "enclave_http_status": 502,
+    "error_code": "upstream_unavailable",
+    "local_anthropic_credential_check": "HTTP 401 authentication_error: invalid x-api-key",
+    "next_step": "Provision a valid Anthropic API key and recheck enclave inference; local credential may differ from provider secret."
+  }
 }
