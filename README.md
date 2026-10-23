@@ -1,6 +1,6 @@
 # AIAB enclave release configuration
 
-This directory contains only measured deployment settings, a policy manifest, and a pinned measurement workflow. The measured v0.1.1 release uses CVM 0.14.9 and passed live enclave acceptance on 2026-09-19.
+This directory contains only measured deployment settings, a policy manifest, and a pinned measurement workflow. The current deployed release is **v0.1.2**, using CVM 0.14.9. Its deployment pins and verification status are in [deployment.json](deployment.json). The original v0.1.1 acceptance below is historical evidence.
 
 Current configuration image: `ghcr.io/lucid-computing/aiab-introspection-enclave@sha256:e42c2af9be20bd0aac1550f216b104b88f7f73121797558818c177b786e7f0db`
 
@@ -9,10 +9,9 @@ Offline policy digest: `8d03b314f111446aba77f1b944fda015919b0e0e222b0026b9057fee
 Measured Tinfoil release digest (v0.1.1): `34b158a1d180c004daa1e0fde014848726be04c0b4506da6b6ed861ee264496c`.
 
 Live enclave: `aiab-introspection.lucid-computing.containers.tinfoil.dev`.
-Independent verification matched the release and policy digests above; the verified
+For the historical v0.1.1 release, independent verification matched its release and policy digests; the verified
 gateway then passed allowed, blocked, signed-report, wrong-pin, direct-token
-rejection, and public-route checks. The exact accepted container is scheduled to
-stop on 2026-09-26 at 04:12:28 UTC.
+rejection, and public-route checks. That original acceptance included a stop scheduled for 2026-09-26; this is not a current lifecycle guarantee.
 
 The runtime image is **PRIVATE** and contains executable AIAB source and classifier definitions. The source GitHub repository also remains **PRIVATE**. Only this small measured configuration repository is public. Tinfoil must pull the private image using its configured registry credential; image visibility and shared credentials must not be changed to work around access failures.
 
@@ -30,19 +29,20 @@ This public config contains no provider credentials or private repository histor
 
 ## Organization migration (2026-10-23)
 
-The configuration on `main` now uses the `Lucid-Computing` GHCR namespace,
-retaining the exact application digest from v0.1.1. This is a configuration
-candidate, not a newly measured or deployed release. The v0.1.1 release and
-measurement above describe the historical configuration with the old registry path.
+Release **v0.1.2** uses `ghcr.io/lucid-computing/aiab-introspection-enclave`,
+retaining the exact application digest from v0.1.1. The image was published to the
+new private package and GHCR confirmed the unchanged digest. No application
+rebuild or policy change was needed.
 
-Before deployment, verify that the pinned image is readable in the new namespace
-using the deployment registry credential. The operator's attempted migration push
-was rejected with HTTP 403; do not assume moving the GitHub repository moved all
-container versions or granted package access. An exact copy is cached on the
-operator VPS and can be published without rebuilding once package access is fixed.
-Keep the package private.
+New measured release digest: `1cf9d292b7631486880cdd8ced07e4a92df330908a23a7984dff2f1e9ffe6b34`.
+Configuration release: https://github.com/Lucid-Computing/aiab-introspection-enclave/releases/tag/v0.1.2
 
-Then tag a new release, run `measure-release.yml`, update the Tinfoil deployment,
-and verify/update the gateway's expected repository and release measurement.
-Do not rewrite old tags or substitute the new config for an old measurement.
+The v0.1.1 measurement above remains historical evidence and must not be used
+for v0.1.2. Gateway clients must verify the new release digest with repository
+`Lucid-Computing/aiab-introspection-enclave`; the policy digest is unchanged.
 The separately deployed signed-plan demo uses `aiab-signed-audit-enclave`.
+
+The v0.1.2 staged deployment was promoted after becoming ready. Independent
+verification and requests through the updated local gateway succeeded. Tinfoil
+still stores the historical GitHub repository alias internally; the release and
+client verification use the canonical `Lucid-Computing` repository.

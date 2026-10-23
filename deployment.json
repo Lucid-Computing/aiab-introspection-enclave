@@ -1,0 +1,11 @@
+{
+  "schema": "aiab-introspection-deployment/v1",
+  "tag": "v0.1.2",
+  "host": "aiab-introspection.lucid-computing.containers.tinfoil.dev",
+  "repo": "Lucid-Computing/aiab-introspection-enclave",
+  "image": "ghcr.io/lucid-computing/aiab-introspection-enclave@sha256:e42c2af9be20bd0aac1550f216b104b88f7f73121797558818c177b786e7f0db",
+  "release_digest": "1cf9d292b7631486880cdd8ced07e4a92df330908a23a7984dff2f1e9ffe6b34",
+  "policy_digest": "8d03b314f111446aba77f1b944fda015919b0e0e222b0026b9057fee47cc1092",
+  "verification": "attestation, approved policy, public identity, gateway health and model listing verified",
+  "measurement_workflow": "https://github.com/Lucid-Computing/aiab-introspection-enclave/actions/runs/39922093864"
+}
